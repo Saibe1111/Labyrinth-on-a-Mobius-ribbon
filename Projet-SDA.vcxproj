@@ -152,6 +152,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Projet-SDA.cpp" />
+    <ClCompile Include="Tab2D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Tab2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
