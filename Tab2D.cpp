@@ -15,14 +15,16 @@ void initialiserTab(Tab2D& tab) {
 	tab.tab = new int* [tab.nbC];
 	for (int i = 0; i < tab.nbC; i++)
 		tab.tab[i] = new int[tab.nbL];
-		tab.tab[1][2] = 3;
-		cout << tab.tab[1][2];
-	for (int i = 0; i < tab.nbC; i++)
-			delete[] tab.tab[i];
-		delete[] tab.tab;
+	tab.tab[1][1] = 3;
+	cout << tab.tab[1][1];
 	
 }
+void detruireTab(Tab2D& tab){
+	for (int i = 0; i < tab.nbC; i++)
+		delete[] tab.tab[i];
+	delete[] tab.tab;
 
+	}
 
 
 

@@ -11,7 +11,7 @@ struct Tab2D {
 
 
 void initialiserTab(Tab2D& tab);
-
+void detruireTab(Tab2D& tab);
 #endif /*_Tab2D_*/
 
 

@@ -12,6 +12,7 @@ int main()
 {
 	Tab2D tab;
 	initialiserTab(tab);
+	detruireTab(tab);
 	return 0;
 }
 
