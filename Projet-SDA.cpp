@@ -5,13 +5,14 @@
 #include <iostream>
 using namespace std;
 #include "Tab2D.h"
-
+#include "DragonGame.h"
 
 
 int main()
 {
 	Tab2D tabf1;
 	Tab2D tabf2;
+	recherche();
 	initialiserTab(tabf1,tabf2);
 	enregistrerTab(tabf1);
 	enregistrerTab(tabf2);

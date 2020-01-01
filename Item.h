@@ -7,5 +7,6 @@
  */
 
 typedef char Item;
+typedef int Case;
 
 #endif

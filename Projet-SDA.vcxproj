@@ -151,11 +151,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DragonGame.cpp" />
+    <ClCompile Include="IndexPositionMb.cpp" />
+    <ClCompile Include="Pile.cpp" />
     <ClCompile Include="Projet-SDA.cpp" />
     <ClCompile Include="Tab2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DragonGame.h" />
+    <ClInclude Include="IndexPositionMb.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Pile.h" />
     <ClInclude Include="Tab2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

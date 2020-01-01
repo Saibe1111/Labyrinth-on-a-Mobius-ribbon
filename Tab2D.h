@@ -2,7 +2,7 @@
 #define _Tab2D_
 
 #include "Item.h"
-
+#include "Tab2D.h"
 struct Tab2D {
 	Item** tab;// adresse du tableau bidimensionnel		// en mémoire dynamique 
 	int nbL;  	// nombre de lignes de la matrice 
