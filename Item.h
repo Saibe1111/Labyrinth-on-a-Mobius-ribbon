@@ -6,6 +6,6 @@
  * @brief Spécialisation du type Item
  */
 
-typedef int Item;
+typedef char Item;
 
 #endif

@@ -6,19 +6,33 @@
 using namespace std;
 #include "Tab2D.h"
 
-void initialiserTab(Tab2D& tab) {
-	cout << "Colone : ";
-	cin >> tab.nbC;
-	cout << "Ligne : ";
-	cin >> tab.nbL;
-
-	tab.tab = new int* [tab.nbC];
-	for (int i = 0; i < tab.nbC; i++)
-		tab.tab[i] = new int[tab.nbL];
-	tab.tab[1][1] = 3;
-	cout << tab.tab[1][1];
-	
+void initialiserTab(Tab2D& tab1, Tab2D& tab2) {
+	//cout << "Ligne : ";
+	cin >> tab1.nbL;
+	tab2.nbL = tab1.nbL;
+	//cout << "Colone : ";
+	cin >> tab1.nbC;
+	tab2.nbC = tab1.nbC;
 }
+void enregistrerTab(Tab2D& tab) {
+	tab.tab = new Item * [tab.nbC];
+	for (int i = 0; i < tab.nbC; i++)
+		tab.tab[i] = new Item[tab.nbL];
+	for (int i = 0; i < tab.nbC; i++) {
+		for (int j = 0; j < tab.nbL; j++) {
+			cin >> tab.tab[i][j];
+		}
+	}
+}
+void afficherTab(Tab2D& tab) {
+	for (int i = 0; i < tab.nbC; i++) {
+		for (int j = 0; j < tab.nbL; j++) {
+			cout << tab.tab[i][j];
+		}
+		cout << endl;
+	}
+}
+
 void detruireTab(Tab2D& tab){
 	for (int i = 0; i < tab.nbC; i++)
 		delete[] tab.tab[i];

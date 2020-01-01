@@ -10,8 +10,10 @@ struct Tab2D {
 };
 
 
-void initialiserTab(Tab2D& tab);
+void initialiserTab(Tab2D& tab1, Tab2D& tab2);
 void detruireTab(Tab2D& tab);
+void afficherTab(Tab2D& tab);
+void enregistrerTab(Tab2D& tab);
 #endif /*_Tab2D_*/
 
 
