@@ -24,6 +24,9 @@ void enregistrerTab(Tab2D& tab) {
 		}
 	}
 }
+void afficherPara(Tab2D& tab) {
+	cout << tab.nbL << " " << tab.nbC << endl;
+}
 void afficherTab(Tab2D& tab) {
 	for (int i = 0; i < tab.nbC; i++) {
 		for (int j = 0; j < tab.nbL; j++) {
@@ -31,6 +34,7 @@ void afficherTab(Tab2D& tab) {
 		}
 		cout << endl;
 	}
+	cout << endl;
 }
 
 void detruireTab(Tab2D& tab){
@@ -38,7 +42,7 @@ void detruireTab(Tab2D& tab){
 		delete[] tab.tab[i];
 	delete[] tab.tab;
 
-	}
+}
 
 
 

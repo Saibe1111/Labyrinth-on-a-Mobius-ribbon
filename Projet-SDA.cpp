@@ -15,6 +15,7 @@ int main()
 	initialiserTab(tabf1,tabf2);
 	enregistrerTab(tabf1);
 	enregistrerTab(tabf2);
+	afficherPara(tabf1);
 	afficherTab(tabf1);
 	afficherTab(tabf2);
 	detruireTab(tabf1);
