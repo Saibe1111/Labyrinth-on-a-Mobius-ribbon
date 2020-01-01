@@ -5,6 +5,6 @@
 #include "Pile.h"
 #include "Tab2D.h"
 
-void recherche();
+void recherche(Tab2D& tab1, Tab2D& tab2);
 
 #endif /*_DragonGame_*/

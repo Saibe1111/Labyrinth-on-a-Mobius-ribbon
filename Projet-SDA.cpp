@@ -12,7 +12,7 @@ int main()
 {
 	Tab2D tabf1;
 	Tab2D tabf2;
-	recherche();
+	recherche(tabf1,tabf2);
 	initialiserTab(tabf1,tabf2);
 	enregistrerTab(tabf1);
 	enregistrerTab(tabf2);

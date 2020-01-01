@@ -1,2 +1,3 @@
-﻿  DragonGame.cpp
-  Projet-SDA.vcxproj -> C:\Users\Sebastien\Documents\Github\Projet-SDA-solution\Debug\Projet-SDA.exe
+﻿  Projet-SDA.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(847,5): error MSB6006: Arrêt de "link.exe" avec le code 1168.
+LINK : fatal error LNK1168: impossible d'ouvrir C:\Users\Sebastien\Documents\Github\Projet-SDA-solution\Debug\Projet-SDA.exe pour écrire
