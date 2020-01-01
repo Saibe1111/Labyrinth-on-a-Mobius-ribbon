@@ -27,7 +27,7 @@ void enregistrerTab(Tab2D& tab) {
 void afficherPara(Tab2D& tab) {
 	cout << tab.nbL << " " << tab.nbC << endl;
 }
-void afficherTab(Tab2D& tab) {
+void afficherTabSp1(Tab2D& tab) {
 	for (int i = 0; i < tab.nbC; i++) {
 		for (int j = 0; j < tab.nbL; j++) {
 			cout << tab.tab[i][j];
