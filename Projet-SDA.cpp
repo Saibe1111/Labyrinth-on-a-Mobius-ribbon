@@ -12,13 +12,13 @@ int main()
 {
 	Tab2D tabf1;
 	Tab2D tabf2;
-	recherche(tabf1,tabf2);
 	initialiserTab(tabf1,tabf2);
 	enregistrerTab(tabf1);
 	enregistrerTab(tabf2);
 	afficherPara(tabf1);
 	afficherTabSp1(tabf1);
 	afficherTabSp1(tabf2);
+	recherche(tabf1, tabf2);
 	detruireTab(tabf1);
 	detruireTab(tabf2);
 	return 0;
