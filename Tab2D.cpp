@@ -39,6 +39,7 @@ void detruireTab(Tab2D& tab){
 	for (int i = 0; i < tab.nbC; i++)
 		delete[] tab.tab[i];
 	delete[] tab.tab;
+
 }
 
 
