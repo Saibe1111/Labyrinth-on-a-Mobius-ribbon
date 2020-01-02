@@ -72,11 +72,10 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		depiler(colone);
 		depiler(face);
 		//mettre à jour le « chemin connexe » de l’entrée du labyrinthe au Dragon
-		if ((ligP != i) && (faceP != k) && (colP != j)) {
+		if ((ligP != i) || (faceP != k) || (colP != j)) {
 			// empiler impérativement dans l’ordre relatif au référentiel défini
 			// ouest (x-1, y), sud-ouest(x-1, y+1), sud (x, y+1), sud-est (x+1, y+1),
 			// est (x+1, y), nord-est (x+1, y-1), nord (x, y-1) et nord-ouest(x-1, y-1)
-			cout << "j: " << j << "i: " << i << endl;
 			if (i > 0) {
 				if (tab1.tab[j][i - 1] == '+') {
 					empiler(ligne, i -1 );
@@ -125,9 +124,24 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 					}
 				}
 			}
-			tab1.tab[j][i] = '0';
+
+
+			switch (step)
+			{
+			case 0: tab1.tab[j][i] = '0'; break;
+			case 1: tab1.tab[j][i] = '1'; break;
+			case 2: tab1.tab[j][i] = '2'; break;
+			case 3: tab1.tab[j][i] = '3'; break;
+			case 4: tab1.tab[j][i] = '4'; break;
+			case 5: tab1.tab[j][i] = '5'; break;
+			case 6: tab1.tab[j][i] = '6'; break;
+			case 7: tab1.tab[j][i] = '7'; break;
+			case 8: tab1.tab[j][i] = '8'; break;
+			case 9: tab1.tab[j][i] = '9'; break;
+			}
 			step++;
 			//std::cout << step;
+			
 		}
 	}
 
@@ -140,17 +154,19 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		// tout le labyrinthe a été exploré (p est vide)// Plans inaccessibles
 		//afficher le feu du mécontentement du Dragon…
 		//fin_si
-	/*if ((ligP == i) && (faceP == k) && (colP == j)) {
-		cout << "le Dragon a trouvé les Plans, il est heureux !!!" << endl;
+	//if ((ligP == i) && (faceP == k) && (colP == j)) {
+		//cout << "le Dragon a trouvé les Plans, il est heureux !!!" << endl;
+		afficherTabSp1(tab1);
+		afficherTabSp1(tab2);
 		int max = ligne.sommet;
-		for (int r = 0; r < max; r++) {
-			cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ")" << endl;
+		for (int r = 0; r < max +1; r++) {
+			cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") ";
 			depiler(ligne);
 			depiler(colone);
 			depiler(face);
 		}
 
-	}*/
+	//}
 
 	detruire(ligne);
 	detruire(colone);
