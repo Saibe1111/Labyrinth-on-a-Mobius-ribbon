@@ -37,6 +37,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				ligP =  j;
 				colP = i;
 				faceP = 1;
+				tab1.tab[i][j] = '+';
 			}
 		}
 	}
@@ -46,6 +47,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				ligP = j;
 				colP = i;
 				faceP = 2;
+				tab2.tab[i][j] = '+';
 			}
 		}
 	}
@@ -84,9 +86,14 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			// est (x+1, y), nord-est (x+1, y-1), nord (x, y-1) et nord-ouest(x-1, y-1)
 			if (k == 1) {
 				if (i > -1) {
-					if (i == 0) {
+					if (i == 0 && tab1.tab[j][tab1.nbL - 1] == '+') {
 						empiler(ligne, tab1.nbL - 1);
 						empiler(colone, j);
+						empiler(face, 2);
+					}
+					else if (i == 0 && tab1.tab[j + 1][tab1.nbL - 1] == '+') {
+						empiler(ligne, tab1.nbL - 1);
+						empiler(colone, j + 1);
 						empiler(face, 2);
 					}
 					else if (tab1.tab[j][i - 1] == '+') {
@@ -106,22 +113,40 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 					empiler(colone, j + 1);
 					empiler(face, 1);
 				}
-				if (tab1.tab[j + 1][i + 1] == '+') {
-					empiler(ligne, i + 1);
-					empiler(colone, j + 1);
-					empiler(face, 1);
-				}
-
-				if (tab1.tab[j][i + 1] == '+') {
-					empiler(ligne, i + 1);
-					empiler(colone, j);
-					empiler(face, 1);
+				if (i > -1) {
+					if (i == tab1.nbL - 1 && tab1.tab[j][0] == '+') {
+						empiler(ligne, 0);
+						empiler(colone, j);
+						empiler(face, 2);
+					}
+					else if (i == tab1.nbL - 1 && tab1.tab[j + 1][0] == '+') {
+						empiler(ligne, 0);
+						empiler(colone, j + 1);
+						empiler(face, 2);
+					}
+					else if (tab1.tab[j + 1][i + 1] == '+') {
+						empiler(ligne, i + 1);
+						empiler(colone, j + 1);
+						empiler(face, 1);
+					}
+					else if (tab1.tab[j][i + 1] == '+') {
+						empiler(ligne, i + 1);
+						empiler(colone, j);
+						empiler(face, 1);
+					}
 				}
 				if (j > 0) {
-					if (tab1.tab[j - 1][i + 1] == '+') {
-						empiler(ligne, i + 1);
-						empiler(colone, j - 1);
-						empiler(face, 1);
+					if (i > -1) {
+						if (i == tab1.nbL - 1 && tab1.tab[j - 1][tab1.nbL - 1] == '+') {
+							empiler(ligne, tab1.nbL - 1);
+							empiler(colone, j - 1);
+							empiler(face, 2);
+						}
+						else if (tab1.tab[j - 1][i + 1] == '+') {
+							empiler(ligne, i + 1);
+							empiler(colone, j - 1);
+							empiler(face, 1);
+						}
 					}
 					if (tab1.tab[j - 1][i] == '+') {
 						empiler(ligne, i);
@@ -200,20 +225,30 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			}
 
 			
-		
+			//afficherTabSp1(tab1);
+			//afficherTabSp1(tab2);
+			//cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+
+
 			step++;
 			//std::cout << step;
 			
 		}
+		else {
+		if (k == 2){ tab2.tab[j][i] = 'V'; }
+		if (k == 1) { tab1.tab[j][i] = 'V'; }
+		break;}
 	}
 
-
+	/*
 	if (faceP == 2) {
 		tab2.tab[colP][ligP] = 'V';
 	}
 	else if(faceP == 1) {
 		tab1.tab[colP][ligP] = 'V';
-	}
+	}*/
+
+
 	//si(l’index de position est celui des Plans du Monde)
 		// le Dragon a trouvé les Plans, il est heureux !!!
 		//afficher le bonheur du Dragon…
@@ -224,7 +259,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		//afficher le feu du mécontentement du Dragon…
 		//fin_si
 	//if ((ligP == i) && (faceP == k) && (colP == j)) {
-		//cout << "le Dragon a trouvé les Plans, il est heureux !!!" << endl;
+		 //cout << "le Dragon a trouvé les Plans, il est heureux !!!" << endl;
 		afficherTabSp1(tab1);
 		afficherTabSp1(tab2);
 		//sprint 2
