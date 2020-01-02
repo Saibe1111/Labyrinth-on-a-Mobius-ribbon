@@ -172,15 +172,26 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			//face 2 
 			
 
-			else if (k == 2) {
-				if (i > 0) {
-					if (tab2.tab[j][i - 1] == '+') {
+			else 			if (k == 2) {
+				if (i > -1) {
+					if (i == 0 && tab2.tab[j][tab2.nbL - 1] == '+') {
+						empiler(ligne, tab2.nbL - 1);
+						empiler(colone, j);
+						empiler(face, 1);
+					}
+					else
+						if (i == 0 && tab2.tab[j + 1][tab2.nbL - 1] == '+') {
+						empiler(ligne, tab2.nbL - 1);
+						empiler(colone, j + 1);
+						empiler(face, 1);
+					}
+					else if (tab2.tab[j][i - 1] == '+') {
 						empiler(ligne, i - 1);
 						empiler(colone, j);
 						empiler(face, 2);
 					}
 
-					if (tab2.tab[j + 1][i - 1] == '+') {
+					else if (tab2.tab[j + 1][i - 1] == '+') {
 						empiler(ligne, i - 1);
 						empiler(colone, j + 1);
 						empiler(face, 2);
@@ -191,30 +202,53 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 					empiler(colone, j + 1);
 					empiler(face, 2);
 				}
-				if (tab2.tab[j + 1][i + 1] == '+') {
-					empiler(ligne, i + 1);
-					empiler(colone, j + 1);
-					empiler(face, 2);
-				}
-
-				if (tab2.tab[j][i + 1] == '+') {
-					empiler(ligne, i + 1);
-					empiler(colone, j);
-					empiler(face, 2);
+				if (i > -1) {
+					if (i == tab2.nbL - 1 && tab2.tab[j][0] == '+') {
+						empiler(ligne, 0);
+						empiler(colone, j);
+						empiler(face, 1);
+					}
+					else if (i == tab2.nbL - 1 && tab2.tab[j + 1][0] == '+') {
+						empiler(ligne, 0);
+						empiler(colone, j + 1);
+						empiler(face, 1);
+					}
+					else if (tab2.tab[j + 1][i + 1] == '+') {
+						empiler(ligne, i + 1);
+						empiler(colone, j + 1);
+						empiler(face, 2);
+					}
+					else if (tab2.tab[j][i + 1] == '+') {
+						empiler(ligne, i + 1);
+						empiler(colone, j);
+						empiler(face, 2);
+					}
 				}
 				if (j > 0) {
-					if (tab2.tab[j - 1][i + 1] == '+') {
-						empiler(ligne, i + 1);
-						empiler(colone, j - 1);
-						empiler(face, 2);
+					if (i > -1) {
+						if (i == tab2.nbL - 1 && tab2.tab[j - 1][tab2.nbL - 1] == '+') {
+							empiler(ligne, tab1.nbL - 1);
+							empiler(colone, j - 1);
+							empiler(face, 1);
+						}
+						else if (tab2.tab[j - 1][i + 1] == '+') {
+							empiler(ligne, i + 1);
+							empiler(colone, j - 1);
+							empiler(face, 2);
+						}
 					}
 					if (tab2.tab[j - 1][i] == '+') {
 						empiler(ligne, i);
 						empiler(colone, j - 1);
 						empiler(face, 2);
 					}
-					if (i > 0) {
-						if (tab2.tab[j - 1][i - 1] == '+') {
+					if (i > -1) {
+						if (i == 0) {
+							empiler(ligne, tab2.nbL - 1);
+							empiler(colone, j);
+							empiler(face, 1);
+						}
+						else if (tab2.tab[j - 1][i - 1] == '+') {
 							empiler(ligne, i - 1);
 							empiler(colone, j - 1);
 							empiler(face, 2);
@@ -223,11 +257,10 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				}
 				tab2.tab[j][i] = 'V';
 			}
-
 			
-			//afficherTabSp1(tab1);
-			//afficherTabSp1(tab2);
-			//cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+			afficherTabSp1(tab1);
+			afficherTabSp1(tab2);
+			cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
 
 
 			step++;
