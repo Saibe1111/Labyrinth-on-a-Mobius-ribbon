@@ -234,11 +234,15 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			}
 			
 <<<<<<< HEAD
+<<<<<<< HEAD
 			afficherTabSp1(tab1);
 			afficherTabSp1(tab2);
 			cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
 
 
+=======
+		
+>>>>>>> parent of 5b3cb26... S3-V2.1
 =======
 		
 >>>>>>> parent of 5b3cb26... S3-V2.1
