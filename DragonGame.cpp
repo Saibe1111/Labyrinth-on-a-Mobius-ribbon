@@ -165,7 +165,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			depiler(colone);
 			depiler(face);
 		}
-
+		cout << endl;
 	//}
 
 	detruire(ligne);
