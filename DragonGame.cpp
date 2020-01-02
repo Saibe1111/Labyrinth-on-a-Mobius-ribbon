@@ -7,9 +7,9 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 	Pile ligne;
 	Pile colone;
 	Pile face; 
-	initialiser(ligne, 10);
-	initialiser(colone, 10);
-	initialiser(face, 10);
+	initialiser(ligne, tab1.nbC*tab1.nbL*2);
+	initialiser(colone, tab1.nbC * tab1.nbL * 2);
+	initialiser(face, tab1.nbC * tab1.nbL * 2);
 //empiler l’index de position (iD, jD) de l’entrée du labyrinthe sur la pile p 
 	for (int i = 0; i < tab1.nbC; i++) {
 		for (int j = 0; j < tab1.nbL; j++) {
@@ -53,7 +53,13 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 	int step = 0;
 	int i, j, k;
 	//while ((ligP != sommet(ligne)) && (faceP != sommet(face)) && (colP != sommet(colone)) && !estVide(ligne)){
-	while (step < 10) {
+	while (step <  tab1.nbC*4*tab1.nbL) {
+
+		if (estVide(colone)) {
+			break;
+		}
+
+
 		/*if (ligP != sommet(ligne))
 			printf("pas bonne ligne");
 		if (faceP != sommet(face))
@@ -76,75 +82,138 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			// empiler impérativement dans l’ordre relatif au référentiel défini
 			// ouest (x-1, y), sud-ouest(x-1, y+1), sud (x, y+1), sud-est (x+1, y+1),
 			// est (x+1, y), nord-est (x+1, y-1), nord (x, y-1) et nord-ouest(x-1, y-1)
-			if (i > 0) {
-				if (tab1.tab[j][i - 1] == '+') {
-					empiler(ligne, i -1 );
-					empiler(colone, j);
-					empiler(face, 1);
-				}
-
-				if (tab1.tab[j + 1][i - 1] == '+') {
-					empiler(ligne, i - 1);
-					empiler(colone, j +1);
-					empiler(face, 1);
-				}
-			}
-			if (tab1.tab[j + 1][i] == '+') {
-				empiler(ligne, i);
-				empiler(colone, j + 1);
-				empiler(face, 1);
-			}
-			if (tab1.tab[j + 1][i + 1] == '+') {
-				empiler(ligne, i + 1);
-				empiler(colone, j + 1);
-				empiler(face, 1);
-			}
-
-			if (tab1.tab[j][i + 1] == '+') {
-				empiler(ligne, i + 1);
-				empiler(colone, j);
-				empiler(face, 1);
-			}
-			if (j > 0) {
-				if (tab1.tab[j - 1][i + 1] == '+') {
-					empiler(ligne, i + 1);
-					empiler(colone, j - 1);
-					empiler(face, 1);
-				}
-				if (tab1.tab[j - 1][i] == '+') {
-					empiler(ligne, i);
-					empiler(colone, j-1);
-					empiler(face, 1);
-				}
-				if (i > 0) {
-					if (tab1.tab[j - 1][i - 1] == '+') {
+			if (k == 1) {
+				if (i > -1) {
+					if (i == 0) {
+						empiler(ligne, tab1.nbL - 1);
+						empiler(colone, j);
+						empiler(face, 2);
+					}
+					else if (tab1.tab[j][i - 1] == '+') {
 						empiler(ligne, i - 1);
-						empiler(colone, j - 1);
+						empiler(colone, j);
+						empiler(face, 1);
+					}
+
+					else if (tab1.tab[j + 1][i - 1] == '+') {
+						empiler(ligne, i - 1);
+						empiler(colone, j + 1);
 						empiler(face, 1);
 					}
 				}
+				if (tab1.tab[j + 1][i] == '+') {
+					empiler(ligne, i);
+					empiler(colone, j + 1);
+					empiler(face, 1);
+				}
+				if (tab1.tab[j + 1][i + 1] == '+') {
+					empiler(ligne, i + 1);
+					empiler(colone, j + 1);
+					empiler(face, 1);
+				}
+
+				if (tab1.tab[j][i + 1] == '+') {
+					empiler(ligne, i + 1);
+					empiler(colone, j);
+					empiler(face, 1);
+				}
+				if (j > 0) {
+					if (tab1.tab[j - 1][i + 1] == '+') {
+						empiler(ligne, i + 1);
+						empiler(colone, j - 1);
+						empiler(face, 1);
+					}
+					if (tab1.tab[j - 1][i] == '+') {
+						empiler(ligne, i);
+						empiler(colone, j - 1);
+						empiler(face, 1);
+					}
+					if (i > -1) {
+						if (i == 0) {
+							empiler(ligne, tab1.nbL - 1);
+							empiler(colone, j);
+							empiler(face, 2);
+						}
+						else if (tab1.tab[j - 1][i - 1] == '+') {
+							empiler(ligne, i - 1);
+							empiler(colone, j - 1);
+							empiler(face, 1);
+						}
+					}
+				}
+				tab1.tab[j][i] = 'V';
 			}
 
+			//face 2 
+			
 
-			switch (step)
-			{
-			case 0: tab1.tab[j][i] = '0'; break;
-			case 1: tab1.tab[j][i] = '1'; break;
-			case 2: tab1.tab[j][i] = '2'; break;
-			case 3: tab1.tab[j][i] = '3'; break;
-			case 4: tab1.tab[j][i] = '4'; break;
-			case 5: tab1.tab[j][i] = '5'; break;
-			case 6: tab1.tab[j][i] = '6'; break;
-			case 7: tab1.tab[j][i] = '7'; break;
-			case 8: tab1.tab[j][i] = '8'; break;
-			case 9: tab1.tab[j][i] = '9'; break;
+			else if (k == 2) {
+				if (i > 0) {
+					if (tab2.tab[j][i - 1] == '+') {
+						empiler(ligne, i - 1);
+						empiler(colone, j);
+						empiler(face, 2);
+					}
+
+					if (tab2.tab[j + 1][i - 1] == '+') {
+						empiler(ligne, i - 1);
+						empiler(colone, j + 1);
+						empiler(face, 2);
+					}
+				}
+				if (tab2.tab[j + 1][i] == '+') {
+					empiler(ligne, i);
+					empiler(colone, j + 1);
+					empiler(face, 2);
+				}
+				if (tab2.tab[j + 1][i + 1] == '+') {
+					empiler(ligne, i + 1);
+					empiler(colone, j + 1);
+					empiler(face, 2);
+				}
+
+				if (tab2.tab[j][i + 1] == '+') {
+					empiler(ligne, i + 1);
+					empiler(colone, j);
+					empiler(face, 2);
+				}
+				if (j > 0) {
+					if (tab2.tab[j - 1][i + 1] == '+') {
+						empiler(ligne, i + 1);
+						empiler(colone, j - 1);
+						empiler(face, 2);
+					}
+					if (tab2.tab[j - 1][i] == '+') {
+						empiler(ligne, i);
+						empiler(colone, j - 1);
+						empiler(face, 2);
+					}
+					if (i > 0) {
+						if (tab2.tab[j - 1][i - 1] == '+') {
+							empiler(ligne, i - 1);
+							empiler(colone, j - 1);
+							empiler(face, 2);
+						}
+					}
+				}
+				tab2.tab[j][i] = 'V';
 			}
+
+			
+		
 			step++;
 			//std::cout << step;
 			
 		}
 	}
 
+
+	if (faceP == 2) {
+		tab2.tab[colP][ligP] = 'V';
+	}
+	else if(faceP == 1) {
+		tab1.tab[colP][ligP] = 'V';
+	}
 	//si(l’index de position est celui des Plans du Monde)
 		// le Dragon a trouvé les Plans, il est heureux !!!
 		//afficher le bonheur du Dragon…
@@ -158,14 +227,15 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		//cout << "le Dragon a trouvé les Plans, il est heureux !!!" << endl;
 		afficherTabSp1(tab1);
 		afficherTabSp1(tab2);
-		int max = ligne.sommet;
-		for (int r = 0; r < max +1; r++) {
-			cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") ";
-			depiler(ligne);
-			depiler(colone);
-			depiler(face);
-		}
-		cout << endl;
+		//sprint 2
+		//int max = ligne.sommet;
+		//for (int r = 0; r < max +1; r++) {
+		//	cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") ";
+		//	depiler(ligne);
+		//	depiler(colone);
+		//	depiler(face);
+		//}
+		//cout << endl;
 	//}
 
 	detruire(ligne);
