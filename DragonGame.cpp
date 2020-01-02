@@ -50,7 +50,10 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		}
 	}
 //tant_que (le Dragon n’a pas trouvé les Plans du Monde et que p n’est pas vide)
+	int step = 0;
+	int i, j, k;
 	//while ((ligP != sommet(ligne)) && (faceP != sommet(face)) && (colP != sommet(colone)) && !estVide(ligne)){
+	while (step < 10) {
 		/*if (ligP != sommet(ligne))
 			printf("pas bonne ligne");
 		if (faceP != sommet(face))
@@ -60,68 +63,95 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		if (!estVide(ligne))
 			printf("pas vide");*/
 
-		//(i, j) <- sommet(p) 
-		int i, j, k;
-		i = sommet(ligne);
+			//(i, j) <- sommet(p) 
 		j = sommet(colone);
+		i = sommet(ligne);
 		k = sommet(face);
 		//  dépiler l’index de position(i, j) de la pile p
 		depiler(ligne);
 		depiler(colone);
 		depiler(face);
-	//mettre à jour le « chemin connexe » de l’entrée du labyrinthe au Dragon
+		//mettre à jour le « chemin connexe » de l’entrée du labyrinthe au Dragon
 		if ((ligP != i) && (faceP != k) && (colP != j)) {
 			// empiler impérativement dans l’ordre relatif au référentiel défini
 			// ouest (x-1, y), sud-ouest(x-1, y+1), sud (x, y+1), sud-est (x+1, y+1),
 			// est (x+1, y), nord-est (x+1, y-1), nord (x, y-1) et nord-ouest(x-1, y-1)
-			if (tab1.tab[j][i - 1] == '+'){
-				empiler(ligne, j - 1);
-				empiler(colone, i);
-				empiler(face, 1);
-			}
-			if (tab1.tab[j + 1][i - 1] == '+') {
-				empiler(ligne, j - 1);
-				empiler(colone, i);
-				empiler(face, 1);
+			cout << "j: " << j << "i: " << i << endl;
+			if (i > 0) {
+				if (tab1.tab[j][i - 1] == '+') {
+					empiler(ligne, i -1 );
+					empiler(colone, j);
+					empiler(face, 1);
+				}
+
+				if (tab1.tab[j + 1][i - 1] == '+') {
+					empiler(ligne, i - 1);
+					empiler(colone, j +1);
+					empiler(face, 1);
+				}
 			}
 			if (tab1.tab[j + 1][i] == '+') {
-				empiler(ligne, j - 1);
-				empiler(colone, i);
+				empiler(ligne, i);
+				empiler(colone, j + 1);
 				empiler(face, 1);
 			}
 			if (tab1.tab[j + 1][i + 1] == '+') {
-				empiler(ligne, j - 1);
-				empiler(colone, i);
+				empiler(ligne, i + 1);
+				empiler(colone, j + 1);
 				empiler(face, 1);
 			}
+
 			if (tab1.tab[j][i + 1] == '+') {
-				empiler(ligne, j - 1);
-				empiler(colone, i);
+				empiler(ligne, i + 1);
+				empiler(colone, j);
 				empiler(face, 1);
 			}
-			if (tab1.tab[j - 1][i + 1] == '+') {
-				empiler(ligne, j - 1);
-				empiler(colone, i);
-				empiler(face, 1);
+			if (j > 0) {
+				if (tab1.tab[j - 1][i + 1] == '+') {
+					empiler(ligne, i + 1);
+					empiler(colone, j - 1);
+					empiler(face, 1);
+				}
+				if (tab1.tab[j - 1][i] == '+') {
+					empiler(ligne, i);
+					empiler(colone, j-1);
+					empiler(face, 1);
+				}
+				if (i > 0) {
+					if (tab1.tab[j - 1][i - 1] == '+') {
+						empiler(ligne, i - 1);
+						empiler(colone, j - 1);
+						empiler(face, 1);
+					}
+				}
 			}
-			if (tab1.tab[j - 1][i] == '+') {
-				empiler(ligne, j - 1);
-				empiler(colone, i);
-				empiler(face, 1);
-			}
-			if (tab1.tab[j - 1][i - 1] == '+') {
-				empiler(ligne, j - 1);
-				empiler(colone, i);
-				empiler(face, 1);
-			}
+			tab1.tab[j][i] = '0';
+			step++;
+			//std::cout << step;
+		}
+	}
+
+	//si(l’index de position est celui des Plans du Monde)
+		// le Dragon a trouvé les Plans, il est heureux !!!
+		//afficher le bonheur du Dragon…
+		//éditer la solution // suite des index de position du chemin
+		 // de l’entrée du labyrinthe aux Plans du Monde
+		//sinon
+		// tout le labyrinthe a été exploré (p est vide)// Plans inaccessibles
+		//afficher le feu du mécontentement du Dragon…
+		//fin_si
+	/*if ((ligP == i) && (faceP == k) && (colP == j)) {
+		cout << "le Dragon a trouvé les Plans, il est heureux !!!" << endl;
+		int max = ligne.sommet;
+		for (int r = 0; r < max; r++) {
+			cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ")" << endl;
+			depiler(ligne);
+			depiler(colone);
+			depiler(face);
 		}
 
-	//}
+	}*/
 
-
-
-	cout << "D = (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ")" << endl;
-	cout << "P =(" << ligP << "," << colP << "," << faceP << ")" << endl;
 	detruire(ligne);
 	detruire(colone);
 	detruire(face);
