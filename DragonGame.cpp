@@ -37,6 +37,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				ligP =  j;
 				colP = i;
 				faceP = 1;
+				tab1.tab[i][j] = '+';
 			}
 		}
 	}
@@ -46,6 +47,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				ligP = j;
 				colP = i;
 				faceP = 2;
+				tab2.tab[i][j] = '+';
 			}
 		}
 	}
@@ -83,8 +85,9 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			// ouest (x-1, y), sud-ouest(x-1, y+1), sud (x, y+1), sud-est (x+1, y+1),
 			// est (x+1, y), nord-est (x+1, y-1), nord (x, y-1) et nord-ouest(x-1, y-1)
 			if (k == 1) {
+				cout << "k1" << endl;
 				if (i > -1) {
-					if (i == 0) {
+					if (i == 0 && tab2.tab[j][tab1.nbL -1] == '+') {
 						empiler(ligne, tab1.nbL - 1);
 						empiler(colone, j);
 						empiler(face, 2);
@@ -129,9 +132,9 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 						empiler(face, 1);
 					}
 					if (i > -1) {
-						if (i == 0) {
+						if (i == 0 && tab2.tab[j -1][tab1.nbL - 1] == '+') {
 							empiler(ligne, tab1.nbL - 1);
-							empiler(colone, j);
+							empiler(colone, j - 1);
 							empiler(face, 2);
 						}
 						else if (tab1.tab[j - 1][i - 1] == '+') {
@@ -147,7 +150,8 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			//face 2 
 			
 
-			else 			if (k == 2) {
+			else if (k == 2) {
+				cout << "k2" << endl;
 				if (i > -1) {
 					if (i == 0 && tab2.tab[j][tab2.nbL - 1] == '+') {
 						empiler(ligne, tab2.nbL - 1);
@@ -218,9 +222,9 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 						empiler(face, 2);
 					}
 					if (i > -1) {
-						if (i == 0) {
+						if (i == 0 && tab2.tab[j - 1][tab1.nbL - 1] == '+') {
 							empiler(ligne, tab2.nbL - 1);
-							empiler(colone, j);
+							empiler(colone, j - 1);
 							empiler(face, 1);
 						}
 						else if (tab2.tab[j - 1][i - 1] == '+') {
@@ -232,33 +236,31 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				}
 				tab2.tab[j][i] = 'V';
 			}
-			
-<<<<<<< HEAD
-<<<<<<< HEAD
+			j = sommet(colone);
+			i = sommet(ligne);
+			k = sommet(face);
+			if(k == 2){ tab2.tab[j][i] = 'V'; }
+			if (k == 1) { tab1.tab[j][i] = 'V'; }
 			afficherTabSp1(tab1);
 			afficherTabSp1(tab2);
 			cout << "(" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
-
-
-=======
-		
->>>>>>> parent of 5b3cb26... S3-V2.1
-=======
-		
->>>>>>> parent of 5b3cb26... S3-V2.1
 			step++;
 			//std::cout << step;
 			
 		}
+		else
+	{
+	break;
+	}
 	}
 
-
+	/*
 	if (faceP == 2) {
 		tab2.tab[colP][ligP] = 'V';
 	}
 	else if(faceP == 1) {
 		tab1.tab[colP][ligP] = 'V';
-	}
+	}*/
 	//si(l’index de position est celui des Plans du Monde)
 		// le Dragon a trouvé les Plans, il est heureux !!!
 		//afficher le bonheur du Dragon…
