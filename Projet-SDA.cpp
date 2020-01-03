@@ -6,10 +6,13 @@
 using namespace std;
 #include "Tab2D.h"
 #include "DragonGame.h"
-
+#include "IndexPositionMb.h"
+#include "Liste.h"
+#include "Chaine.h"
 
 int main()
 {
+	
 	Tab2D tabf1;
 	Tab2D tabf2;
 	initialiserTab(tabf1,tabf2);

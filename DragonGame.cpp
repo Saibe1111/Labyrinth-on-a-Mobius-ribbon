@@ -3,10 +3,20 @@
 #include <iostream>
 using namespace std;
 #include "DragonGame.h"
+#include "IndexPositionMb.h"
+#include "Liste.h"
+#include "Chaine.h"
+
 void recherche(Tab2D& tab1, Tab2D& tab2) {
+	Liste posf;
+	Liste posc;
+	Liste posl;
 	Pile ligne;
 	Pile colone;
 	Pile face; 
+	listecreat(posf);
+	listecreat(posl);
+	listecreat(posc);
 	initialiser(ligne, tab1.nbC*tab1.nbL*2);
 	initialiser(colone, tab1.nbC * tab1.nbL * 2);
 	initialiser(face, tab1.nbC * tab1.nbL * 2);
@@ -71,6 +81,8 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		j = sommet(colone);
 		i = sommet(ligne);
 		k = sommet(face);
+		
+		//conex(i, j, k, posf, posc, posl);
 		//  dépiler l’index de position(i, j) de la pile p
 		depiler(ligne);
 		depiler(colone);
@@ -323,4 +335,5 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 	detruire(ligne);
 	detruire(colone);
 	detruire(face);
+	destru(posc, posf, posl);
 }
