@@ -1,5 +1,2 @@
 ﻿  DragonGame.cpp
-C:\Users\Sebastien\Documents\Github\Projet-SDA-solution\Projet-SDA\DragonGame.cpp(11,8): warning C4101: 'posf' : variable locale non référencée
-C:\Users\Sebastien\Documents\Github\Projet-SDA-solution\Projet-SDA\DragonGame.cpp(13,8): warning C4101: 'posl' : variable locale non référencée
-C:\Users\Sebastien\Documents\Github\Projet-SDA-solution\Projet-SDA\DragonGame.cpp(12,8): warning C4101: 'posc' : variable locale non référencée
   Projet-SDA.vcxproj -> C:\Users\Sebastien\Documents\Github\Projet-SDA-solution\Debug\Projet-SDA.exe
