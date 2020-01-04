@@ -3,16 +3,13 @@
 #include <stdlib.h>
 #include <iostream>
 using namespace std;
-#include "Tab2D.h"
-#include "Liste.h"
-#include "Chaine.h"
 #include "IndexPositionMb.h"
 void listecreat(Liste& pos) {
 	initialiser(pos);
 }
-void conex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& posf) {
+void conex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& posf, Tab2D& tab) {
 	
-	while (longueur(posf) != 0 && !testconex(ligne, colone, face, posl, posc, posf)) {
+	while (longueur(posf) != 0 && !testconex(ligne, colone, face, posl, posc, posf, tab)) {
 		supprimer(posf, 0);
 		supprimer(posl, 0);
 		supprimer(posc, 0);
@@ -25,6 +22,20 @@ void conex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& pos
 		//cout << (lire(posf, i)) << endl;
 	
 }
+void afficlist(Liste& posl, Liste& posc, Liste& posf, Tab2D& tab1, Tab2D& tab2) {
+	for (int i = 0; i < longueur(posl); i++) {
+		//cout << "(" << lire(posl, i) << "," << lire(posc, i) << "," << lire(posf, i) << ")" << endl;
+		
+		if (lire(posf, i) == 1){
+		tab1.tab[lire(posc, i)][lire(posl, i)] = 'C';
+		}
+		if (lire(posf, i) == 2) {
+			tab2.tab[lire(posc, i)][lire(posl, i)] = 'C';
+		}
+	}
+
+
+}
 void destru(Liste& posl, Liste& posc, Liste& posf) {
 	detruire(posf);
 	detruire(posc);
@@ -32,8 +43,20 @@ void destru(Liste& posl, Liste& posc, Liste& posf) {
 }
 // ouest (x-1, y), sud-ouest(x-1, y+1), sud (x, y+1), sud-est (x+1, y+1),
 // est (x+1, y), nord-est (x+1, y-1), nord (x, y-1) et nord-ouest(x-1, y-1)
-bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& posf){
-	if (lire(posl,0) == ligne-1 && lire(posc, 0) == colone) {// ouest (x-1, y)
+bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& posf, Tab2D& tab){
+	
+	if (lire(posl, 0) == tab.nbL - 1){
+		 if ( lire(posc, 0) == colone) {// ouest (x-1, y) passage 
+			return true;
+		}
+		 else if ( lire(posc, 0) == colone + 1) {//sud-ouest(x-1, y+1)
+			 return true;
+		 }
+		 else if ( lire(posc, 0) == colone - 1) {//nord-ouest(x-1, y-1)
+			 return true;
+		 }
+	}
+	else if (lire(posl, 0) == ligne - 1 && lire(posc, 0) == colone) {// ouest (x-1, y)
 		return true;
 	}
 	else if (lire(posl, 0) == ligne - 1 && lire(posc, 0) == colone + 1) {//sud-ouest(x-1, y+1)
@@ -41,6 +64,17 @@ bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste&
 	}
 	else if (lire(posl, 0) == ligne && lire(posc, 0) == colone + 1) {// sud(x, y + 1)
 		return true;
+	}
+	if (lire(posl, 0) == 0) {
+		if ( lire(posc, 0) == colone + 1) {//sud-est (x+1, y+1)
+			return true;
+		}
+		else if (lire(posc, 0) == colone) {//est (x+1, y)
+			return true;
+		}
+		else if ( lire(posc, 0) == colone - 1) {//nord-est (x+1, y-1)
+			return true;
+		}
 	}
 	else if (lire(posl, 0) == ligne + 1 && lire(posc, 0) == colone + 1) {//sud-est (x+1, y+1)
 		return true;
