@@ -62,7 +62,9 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 	//while ((ligP != sommet(ligne)) && (faceP != sommet(face)) && (colP != sommet(colone)) && !estVide(ligne)){
 	while (step <  tab1.nbC*500*tab1.nbL) {
 
-
+		if (tab2.tab[colP][ligP] == 'V') {
+			break;
+		}
 		/*if (ligP != sommet(ligne))
 			printf("pas bonne ligne");
 		if (faceP != sommet(face))
