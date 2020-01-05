@@ -1,2 +1,3 @@
-﻿  DragonGame.cpp
+﻿  IndexPositionMb.cpp
+E:\IUT\Projet VS\Projet-SDA\IndexPositionMb.cpp(30,20): warning C4018: '<' : incompatibilité signed/unsigned
   Projet-SDA.vcxproj -> E:\IUT\Projet VS\Projet-SDA\Debug\Projet-SDA.exe

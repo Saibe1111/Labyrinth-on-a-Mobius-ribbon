@@ -59,15 +59,15 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				ligP = j;
 				colP = i;
 				faceP = 2;
-				tab2.tab[i][j] = 'P';
+				tab2.tab[i][j] = '+';
 			}
 		}
 	}
 //tant_que (le Dragon n’a pas trouvé les Plans du Monde et que p n’est pas vide)
 	int step = 0;
 	int i, j, k;
-	//while ((ligP != sommet(ligne)) || (faceP != sommet(face)) || (colP != sommet(colone)) && !estVide(ligne)){
-		while(step < 20) {
+	while ((ligP != sommet(ligne)) || (faceP != sommet(face)) || (colP != sommet(colone)) && !estVide(ligne)){
+		//while(step < 20) {
 			//(i, j) <- sommet(p) 
 		j = sommet(colone);
 		i = sommet(ligne);
@@ -77,11 +77,12 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		depiler(ligne);
 		depiler(colone);
 		depiler(face);
-		conex(i, j, k, Lligne, Lcolone, Lface, tab1);
+		
 		
 		//std::cout << "depile : i" << i << "j" << j << "k" << k << endl;
 		//mettre à jour le « chemin connexe » de l’entrée du labyrinthe au Dragon
 		if ((ligP != i) || (faceP != k) || (colP != j)) {
+			conex(i, j, k, Lligne, Lcolone, Lface, tab1);
 			// empiler impérativement dans l’ordre relatif au référentiel défini
 			// ouest (x-1, y), sud-ouest(x-1, y+1), sud (x, y+1), sud-est (x+1, y+1),
 			// est (x+1, y), nord-est (x+1, y-1), nord (x, y-1) et nord-ouest(x-1, y-1)
@@ -333,13 +334,13 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		}
 	}
 
-	/*
+	
 	if (faceP == 2) {
-		tab2.tab[colP][ligP] = 'V';
+		tab2.tab[colP][ligP] = 'C';
 	}
 	else if(faceP == 1) {
-		tab1.tab[colP][ligP] = 'V';
-	}*/
+		tab1.tab[colP][ligP] = 'C';
+	}
 	//si(l’index de position est celui des Plans du Monde)
 		// le Dragon a trouvé les Plans, il est heureux !!!
 		//afficher le bonheur du Dragon…
