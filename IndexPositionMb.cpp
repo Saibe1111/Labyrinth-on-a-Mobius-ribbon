@@ -45,17 +45,18 @@ void destru(Liste& posl, Liste& posc, Liste& posf) {
 // est (x+1, y), nord-est (x+1, y-1), nord (x, y-1) et nord-ouest(x-1, y-1)
 bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& posf, Tab2D& tab){
 	
-	if (lire(posl, 0) == tab.nbL - 1){
-		 if ( lire(posc, 0) == colone) {// ouest (x-1, y) passage 
+	if (lire(posl, 0) == 0) {
+		if (lire(posc, 0) == colone + 1) {//sud-est (x+1, y+1)
 			return true;
 		}
-		 else if ( lire(posc, 0) == colone + 1) {//sud-ouest(x-1, y+1)
-			 return true;
-		 }
-		 else if ( lire(posc, 0) == colone - 1) {//nord-ouest(x-1, y-1)
-			 return true;
-		 }
+		else if (lire(posc, 0) == colone) {//est (x+1, y)
+			return true;
+		}
+		else if (lire(posc, 0) == colone - 1) {//nord-est (x+1, y-1)
+			return true;
+		}
 	}
+
 	else if (lire(posl, 0) == ligne - 1 && lire(posc, 0) == colone) {// ouest (x-1, y)
 		return true;
 	}
@@ -65,14 +66,15 @@ bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste&
 	else if (lire(posl, 0) == ligne && lire(posc, 0) == colone + 1) {// sud(x, y + 1)
 		return true;
 	}
-	if (lire(posl, 0) == 0) {
-		if ( lire(posc, 0) == colone + 1) {//sud-est (x+1, y+1)
+
+	if (lire(posl, 0) == tab.nbL - 1) {
+		if (lire(posc, 0) == colone + 1) {//sud-est (x+1, y+1)
 			return true;
 		}
 		else if (lire(posc, 0) == colone) {//est (x+1, y)
 			return true;
 		}
-		else if ( lire(posc, 0) == colone - 1) {//nord-est (x+1, y-1)
+		else if (lire(posc, 0) == colone - 1) {//nord-est (x+1, y-1)
 			return true;
 		}
 	}
