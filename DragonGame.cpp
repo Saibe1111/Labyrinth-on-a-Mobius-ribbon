@@ -59,15 +59,15 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				ligP = j;
 				colP = i;
 				faceP = 2;
-				tab2.tab[i][j] = '+';
+				tab2.tab[i][j] = 'P';
 			}
 		}
 	}
 //tant_que (le Dragon n’a pas trouvé les Plans du Monde et que p n’est pas vide)
 	int step = 0;
 	int i, j, k;
-	while ((ligP != sommet(ligne)) || (faceP != sommet(face)) || (colP != sommet(colone)) && !estVide(ligne)){
-		//while(step < 30) {
+	//while ((ligP != sommet(ligne)) || (faceP != sommet(face)) || (colP != sommet(colone)) && !estVide(ligne)){
+		while(step < 20) {
 			//(i, j) <- sommet(p) 
 		j = sommet(colone);
 		i = sommet(ligne);
@@ -77,7 +77,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		depiler(ligne);
 		depiler(colone);
 		depiler(face);
-		//conex(i, j, k, Lligne, Lcolone, Lface, tab1);
+		conex(i, j, k, Lligne, Lcolone, Lface, tab1);
 		
 		//std::cout << "depile : i" << i << "j" << j << "k" << k << endl;
 		//mettre à jour le « chemin connexe » de l’entrée du labyrinthe au Dragon
@@ -333,13 +333,13 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		}
 	}
 
-	
+	/*
 	if (faceP == 2) {
 		tab2.tab[colP][ligP] = 'V';
 	}
 	else if(faceP == 1) {
 		tab1.tab[colP][ligP] = 'V';
-	}
+	}*/
 	//si(l’index de position est celui des Plans du Monde)
 		// le Dragon a trouvé les Plans, il est heureux !!!
 		//afficher le bonheur du Dragon…
@@ -351,7 +351,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		//fin_si
 	//if ((ligP == i) && (faceP == k) && (colP == j)) {
 		//cout << "le Dragon a trouvé les Plans, il est heureux !!!" << endl;
-	/*
+	
 	for (int i = 0; i < tab1.nbC; i++) {
 		for (int j = 0; j < tab1.nbL; j++) {
 			if (tab1.tab[i][j] == 'V') {
@@ -365,9 +365,9 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				tab2.tab[i][j] = '+';
 			}
 		}
-	}*/
+	}
 
-		//afficlist(Lligne, Lcolone, Lface, tab1, tab2);
+		afficlist(Lligne, Lcolone, Lface, tab1, tab2);
 		afficherTabSp1(tab1);
 		afficherTabSp1(tab2);
 		//sprint 2
