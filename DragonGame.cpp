@@ -371,6 +371,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 		afficlist(Lligne, Lcolone, Lface, tab1, tab2);
 		afficherTabSp1(tab1);
 		afficherTabSp1(tab2);
+		positionaffi(Lligne, Lcolone, Lface);
 		//sprint 2
 		//int max = ligne.sommet;
 		//for (int r = 0; r < max +1; r++) {

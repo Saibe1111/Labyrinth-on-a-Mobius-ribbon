@@ -12,4 +12,5 @@ void conex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& pos
 bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& posf, Tab2D& tab);
 void afficlist(Liste& posl, Liste& posc, Liste& posf, Tab2D& tab1, Tab2D& tab2);
 void destru(Liste& posl, Liste& posc, Liste& posf);
+void positionaffi(Liste& posl, Liste& posc, Liste& posf);
 #endif /*_IndexPositionMb_*/
