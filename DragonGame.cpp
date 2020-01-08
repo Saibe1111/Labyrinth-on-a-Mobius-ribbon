@@ -19,9 +19,9 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 	listecreat(Lligne);
 	listecreat(Lcolone);
 	listecreat(Lface);
-	initialiser(ligne, tab1.nbC*tab1.nbL*4);
-	initialiser(colone, tab1.nbC * tab1.nbL * 4);
-	initialiser(face, tab1.nbC * tab1.nbL * 4);
+	initialiser(ligne, tab1.nbC*tab1.nbL*8);
+	initialiser(colone, tab1.nbC * tab1.nbL * 8);
+	initialiser(face, tab1.nbC * tab1.nbL * 8);
 //empiler l’index de position (iD, jD) de l’entrée du labyrinthe sur la pile p 
 	for (int i = 0; i < tab1.nbC; i++) {
 		for (int j = 0; j < tab1.nbL; j++) {
@@ -29,6 +29,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				empiler(ligne, j);
 				empiler(colone, i);
 				empiler(face, 1);
+				
 			}
 		}
 	}
@@ -37,7 +38,8 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			if (tab2.tab[i][j] == 'D') {
 				empiler(ligne, j);
 				empiler(colone, i);
-				empiler(face, 1);
+				empiler(face, 2);
+				
 			}
 		}
 	}
@@ -49,7 +51,10 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				ligP =  j;
 				colP = i;
 				faceP = 1;
-				tab1.tab[i][j] = '+';
+				tab1.pLigne = j;
+				tab1.pColone = i;
+				tab1.pFace = 1;
+				tab1.tab[i][j] = 'P';
 			}
 		}
 	}
@@ -59,7 +64,10 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 				ligP = j;
 				colP = i;
 				faceP = 2;
-				tab2.tab[i][j] = '+';
+				tab1.pLigne = j;
+				tab1.pColone = i;
+				tab1.pFace = 2;
+				tab2.tab[i][j] = 'P';
 			}
 		}
 	}
@@ -89,6 +97,7 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			//std::cout << "i" << i << "j" << j ;
 			if (k == 1) {
 				//cout << "k1" << endl;
+				//cout << "i: " << i << " j: " << j << " 1 " << endl;
 				if (i > -1) {
 					if (i == 0 && tab2.tab[(tab1.nbC - j - 1)][tab1.nbL - 1] == '+') {// ouest (x-1, y)
 						assert((tab1.nbL - j - 1) < 150);;
@@ -106,45 +115,49 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 						empiler(face, 1);
 						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
 					}
-					if (i == 0 && tab2.tab[(tab1.nbC - j - 1) - 1][tab1.nbL - 1] == '+') {//sud-ouest(x-1, y+1)
-						assert(j + 1 < 150);
-						empiler(ligne, tab1.nbL - 1);
-						empiler(colone, (tab1.nbC - j - 1) - 1);
-						empiler(face, 2);
-						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+					if (j + 1 < tab1.nbC) {
+						if (i == 0 && tab2.tab[(tab1.nbC - j - 1) - 1][tab1.nbL - 1] == '+') {//sud-ouest(x-1, y+1)
+							assert(j + 1 < 150);
+							empiler(ligne, tab1.nbL - 1);
+							empiler(colone, (tab1.nbC - j - 1) - 1);
+							empiler(face, 2);
+							//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+						}
+						else if (tab1.tab[j + 1][i - 1] == '+') {//sud-ouest(x-1, y+1)
+							assert(j + 1 < 150);
+							empiler(ligne, i - 1);
+							empiler(colone, j + 1);
+							empiler(face, 1);
+							//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+						}
 					}
-					else if (tab1.tab[j + 1][i - 1] == '+') {//sud-ouest(x-1, y+1)
+				}
+				if (j + 1 < tab1.nbC) {
+					if (tab1.tab[j + 1][i] == '+') { //sud (x, y+1)
 						assert(j + 1 < 150);
-						empiler(ligne, i - 1);
+						empiler(ligne, i);
 						empiler(colone, j + 1);
 						empiler(face, 1);
 						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
 					}
 				}
-				if (tab1.tab[j + 1][i] == '+') { //sud (x, y+1)
-					assert(j + 1 < 150);
-					empiler(ligne, i);
-					empiler(colone, j + 1);
-					empiler(face, 1);
-					//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
-				}
-
 				// debug changement de face 
-				if (i == tab1.nbL - 1 && tab2.tab[(tab1.nbC - j - 1) - 1][0] == '+') {//sud-est (x+1, y+1)
-					assert((tab1.nbC - j - 2)  < 150);
-					empiler(ligne, 0);
-					empiler(colone, (tab1.nbC - j - 1) - 1);
-					empiler(face, 2);
-					//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+				if (j + 1 < tab1.nbC) {
+					if (i == tab1.nbL - 1 && tab2.tab[(tab1.nbC - j - 1) - 1][0] == '+') {//sud-est (x+1, y+1)
+						assert((tab1.nbC - j - 2) < 150);
+						empiler(ligne, 0);
+						empiler(colone, (tab1.nbC - j - 1) - 1);
+						empiler(face, 2);
+						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+					}
+					else if (tab1.tab[j + 1][i + 1] == '+') {//sud-est (x+1, y+1)
+						assert(j + 1 < 150);
+						empiler(ligne, i + 1);
+						empiler(colone, j + 1);
+						empiler(face, 1);
+						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+					}
 				}
-				else if (tab1.tab[j + 1][i + 1] == '+') {//sud-est (x+1, y+1)
-					assert(j + 1 < 150);
-					empiler(ligne, i + 1);
-					empiler(colone, j + 1);
-					empiler(face, 1);
-					//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
-				}
-				
 				// debug changement de face 
 				if (i == tab1.nbL - 1 && tab2.tab[(tab1.nbC - j - 1)][0] == '+') {// est (x+1, y)
 					assert(j < 150);
@@ -209,7 +222,8 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 			//face 2 
 			
 			else if (k == 2) {
-				//cout << "k2" << endl;
+				//cout << "i: " << tab1.nbC << " j: "<< tab1.nbL << " 2" << endl;
+				
 				if (i > -1) {
 					if (i == 0 && tab1.tab[(tab1.nbC - j - 1)][tab1.nbL - 1] == '+') {// ouest (x-1, y)
 						assert((tab1.nbC - j - 1) < 150);
@@ -226,45 +240,53 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 						empiler(face, 2);
 						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
 					}
-					if (i == 0 && tab1.tab[(tab1.nbC - j - 1) - 1][tab1.nbL - 1] == '+') {//sud-ouest(x-1, y+1)
+					//cout << j + 1;
+					//cout << "'"<< tab1.nbC;
+					if (j + 1 < tab1.nbC){
+					if (i == 0 && tab1.tab[(tab1.nbC - j - 1) - 1][tab1.nbL - 1] == '+' ) {//sud-ouest(x-1, y+1)
 						assert(((tab1.nbC - j - 1) - 1) < 150);
 						empiler(ligne, tab1.nbL - 1);
 						empiler(colone, (tab1.nbC - j - 1)  - 1);
 						empiler(face, 1);
 						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
 					}
-					else if (tab2.tab[j + 1][i - 1] == '+') {//sud-ouest(x-1, y+1)
+					
+
+					else if (tab2.tab[j + 1][i - 1] == '+' ) {//sud-ouest(x-1, y+1)
 						assert(j + 1 < 150);
 						empiler(ligne, i - 1);
 						empiler(colone, j + 1);
 						empiler(face, 2);
 						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
 					}
+					}
 				}
-				if (tab2.tab[j + 1][i] == '+') { //sud (x, y+1)
-					assert(j + 1 < 150);
-					empiler(ligne, i);
-					empiler(colone, j + 1);
-					empiler(face, 2);
-					//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
-				}
+				if (j + 1 < tab1.nbC) {
+					if (tab2.tab[j + 1][i] == '+') { //sud (x, y+1)
+						assert(j + 1 < 150);
+						empiler(ligne, i);
+						empiler(colone, j + 1);
+						empiler(face, 2);
+						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+					}
 
-				// debug changement de face 
-				if (i == tab1.nbL - 1 && tab1.tab[(tab1.nbC - j - 1) - 1][0] == '+') {//sud-est (x+1, y+1)
-					assert(((tab1.nbC - j - 1) - 1) < 150);
-					empiler(ligne, 0);
-					empiler(colone, (tab1.nbC - j - 1) - 1);
-					empiler(face, 1);
-					//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
-				}
-				else if (tab2.tab[j + 1][i + 1] == '+') {//sud-est (x+1, y+1)
-					assert(j + 1 < 150);
-					empiler(ligne, i + 1);
-					empiler(colone, j + 1);
-					empiler(face, 2);
-					//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
-				}
+					// debug changement de face 
+					if (i == tab1.nbL - 1 && tab1.tab[(tab1.nbC - j - 1) - 1][0] == '+') {//sud-est (x+1, y+1)
+						assert(((tab1.nbC - j - 1) - 1) < 150);
+						empiler(ligne, 0);
+						empiler(colone, (tab1.nbC - j - 1) - 1);
+						empiler(face, 1);
+						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+					}
 
+					else if (tab2.tab[j + 1][i + 1] == '+') {//sud-est (x+1, y+1)
+						assert(j + 1 < 150);
+						empiler(ligne, i + 1);
+						empiler(colone, j + 1);
+						empiler(face, 2);
+						//cout << "Empile : (" << sommet(ligne) << "," << sommet(colone) << "," << sommet(face) << ") " << endl;
+					}
+				}
 				// debug changement de face 
 				if (i == tab1.nbL - 1 && tab1.tab[tab1.nbC - j - 1][0] == '+') {// est (x+1, y)
 					assert((tab1.nbC - j - 1) < 150);
@@ -335,12 +357,12 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 	}
 
 	
-	if (faceP == 2) {
-		tab2.tab[colP][ligP] = 'C';
-	}
-	else if(faceP == 1) {
-		tab1.tab[colP][ligP] = 'C';
-	}
+	//if (faceP == 2) {
+		//tab2.tab[colP][ligP] = 'C';
+	//}
+	//else if(faceP == 1) {
+		//tab1.tab[colP][ligP] = 'C';
+	//}
 	//si(l’index de position est celui des Plans du Monde)
 		// le Dragon a trouvé les Plans, il est heureux !!!
 		//afficher le bonheur du Dragon…
@@ -369,9 +391,9 @@ void recherche(Tab2D& tab1, Tab2D& tab2) {
 	}
 
 		afficlist(Lligne, Lcolone, Lface, tab1, tab2);
-		afficherTabSp1(tab1);
-		afficherTabSp1(tab2);
-		positionaffi(Lligne, Lcolone, Lface);
+		//afficherTabSp1(tab1);
+		//afficherTabSp1(tab2);
+		//positionaffi(Lligne, Lcolone, Lface);
 		//sprint 2
 		//int max = ligne.sommet;
 		//for (int r = 0; r < max +1; r++) {

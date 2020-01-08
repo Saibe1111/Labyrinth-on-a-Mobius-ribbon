@@ -7,6 +7,9 @@ struct Tab2D {
 	Item** tab;// adresse du tableau bidimensionnel		// en mémoire dynamique 
 	int nbL;  	// nombre de lignes de la matrice 
 	int nbC; 	// nombre de colonnes de la matrice
+	int pFace;
+	int pLigne;
+	int pColone;
 };
 
 

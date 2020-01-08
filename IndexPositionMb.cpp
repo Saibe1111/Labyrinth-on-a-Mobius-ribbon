@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -10,7 +9,7 @@ void listecreat(Liste& pos) {
 void conex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& posf, Tab2D& tab) {
 	
 	while (longueur(posf) != 0 && !testconex(ligne, colone, face, posl, posc, posf, tab)) {
-		std::cout << "SUPPRIME Ligne: " << (lire(posl, 0)) << "Colone: " << (lire(posc, 0)) << "Face: " << (lire(posf, 0)) << endl;
+		//std::cout << "SUPPRIME Ligne: " << (lire(posl, 0)) << "Colone: " << (lire(posc, 0)) << "Face: " << (lire(posf, 0)) << endl;
 		supprimer(posf, 0);
 		supprimer(posl, 0);
 		supprimer(posc, 0);
@@ -20,6 +19,11 @@ void conex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste& pos
 	inserer(posf, 0, face);
 	inserer(posl, 0, ligne);
 	inserer(posc, 0, colone);
+	//cout << "(" << lire(posl, 0) << "," << lire(posc, 0) << "," << lire(posf, 0) << ")" << endl;
+
+	if (face == tab.pFace && colone ==tab.pColone && ligne ==tab.pLigne-1 ) {
+		cout << "stop";
+	}
 	//cout << "ligne" << ligne;
 	//Tant que(!estVide(filAriane) et !Connexe(fileAriane[0], C))
 	//for (unsigned int i = 0; i < longueur(posf); ++i)
@@ -71,8 +75,8 @@ bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste&
 			return true;
 		}
 		else {
-			cout << "faux1";
-			return false;
+			//cout << "faux1";
+			//return false;
 			
 		}
 	}
@@ -88,8 +92,8 @@ bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste&
 			return true;
 		}
 		else {
-			cout << "faux2";
-			return false;
+			//cout << "faux2";
+			//return false;
 
 		}
 	}
@@ -105,8 +109,8 @@ bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste&
 			return true;
 		}
 		else {
-			cout << tab.nbL;
-			cout << "faux3" << endl;
+			//cout << tab.nbL;
+			//cout << "faux3" << endl;
 			//return false;
 		}
 	}
@@ -122,7 +126,7 @@ bool testconex(int ligne, int colone, int face, Liste& posl, Liste& posc, Liste&
 			return true;
 		}
 		else {
-			cout << "faux4";
+			//cout << "faux4";
 			//return false;
 		}
 	}
