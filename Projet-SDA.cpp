@@ -12,20 +12,15 @@ using namespace std;
 
 int main()
 {
-	
-	Tab2D tabf1;
-	Tab2D tabf2;
-	initialiserTab(tabf1,tabf2);
-	enregistrerTab(tabf1);
-	enregistrerTab(tabf2);
-	afficherPara(tabf1);
-	recherche(tabf1, tabf2);
-	afficherTabSp1(tabf1);
-	afficherTabSp1(tabf2);
-	//detruireTab(tabf1);
-	//detruireTab(tabf2);
+
+	Tab2D tabf1; //creation face 1
+	Tab2D tabf2; //creation face 2
+	initialiserTab(tabf1, tabf2); //initialiser face 1 et face 2
+	enregistrerTab(tabf1); //enregistrer tableau 1
+	enregistrerTab(tabf2); //enregistrer tableau 2
+	afficherPara(tabf1); //affiche les parametres du tableau
+	recherche(tabf1, tabf2); //recherche les chemins sur les 2 faces
+	detruireTab(tabf1); //destruction tableau 1
+	detruireTab(tabf2);//destruction tableau 2
 	return 0;
 }
-
-//Codez a)les fonctions initialiser et detruire de TableauMbet
-//b)les fonctions initialiser, detruire, et afficherSp1de LabyrintheMb.Spécialisez ItemMben caractère.

@@ -1,2 +1,12 @@
-﻿  DragonGame.cpp
-  Projet-SDA.vcxproj -> C:\Users\Sebastien\Documents\Github\Projet-SDA-solution\Projet-SDA\Debug\Projet-SDA.exe
+﻿  Chaine.cpp
+  DragonGame.cpp
+  IndexPositionMb.cpp
+F:\Projet-SDA-solution\Projet-SDA\IndexPositionMb.cpp(34,20): warning C4018: '<' : incompatibilité signed/unsigned
+F:\Projet-SDA-solution\Projet-SDA\IndexPositionMb.cpp(50,20): warning C4018: '<' : incompatibilité signed/unsigned
+  Liste.cpp
+  Pile.cpp
+  Projet-SDA.cpp
+  Tab2D.cpp
+F:\Projet-SDA-solution\Projet-SDA\Tab2D.cpp(32,18): warning C4553: '==' : résultat de l'expression non utilisé ; souhaitiez-vous utiliser '=' ?
+  Génération de code en cours...
+  Projet-SDA.vcxproj -> F:\Projet-SDA-solution\Projet-SDA\Debug\Projet-SDA.exe

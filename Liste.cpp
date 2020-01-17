@@ -1,11 +1,3 @@
-/**
- * @file Liste.cpp
- * Projet sem06-tp-Cpp3
- * @author l'équipe pédagogique
- * @version 1 - 26/01/06
- * @brief Composant de liste d'Item2s stockés dans une chaîne à simple chaînage
- * Structures de données et algorithmes - DUT1 Paris 5
- */
 
 #include <iostream>
 #include <cassert>

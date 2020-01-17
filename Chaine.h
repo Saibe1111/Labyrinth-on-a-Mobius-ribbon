@@ -1,14 +1,7 @@
 #ifndef CHAINE_H_
 #define CHAINE_H_
 
-/**
- * @file Chaine.h
- * Projet sem06-tp-Cpp1
- * @author l'équipe pédagogique
- * @version 1 25/01/05
- * @brief Composant de chaîne d'Item2s avec simple chaînage
- * Structures de données et algorithmes - DUT1 Paris 5
- */
+
 
 typedef int Item2;
 
